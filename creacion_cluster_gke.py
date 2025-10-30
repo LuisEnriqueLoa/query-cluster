@@ -35,6 +35,7 @@ for entry in client.list_entries(filter_=filter_str, page_size=3):
         ip_aliasing = cluster.get("ipAllocationPolicy", {}).get("useIpAliases", False)
         node_count = int(node_pool.get("initialNodeCount", 0))
         scopes_clean = ", ".join([s.split("/")[-1] for s in scopes])
+        timestamp = payload.get("response", {}).get("startTime", {})
 
         print(
             f"- Usuario: {email} \n "
@@ -45,6 +46,7 @@ for entry in client.list_entries(filter_=filter_str, page_size=3):
             f"- IP aliasing: {'activado' if ip_aliasing else 'desactivado'} \n "
             f"- Nodos iniciales: {node_count} \n "
             f"- Scopes de acceso: {scopes_clean} \n"
+            f"- Fecha de operación: {timestamp} \n"
         )
 
 

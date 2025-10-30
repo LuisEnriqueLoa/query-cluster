@@ -21,10 +21,16 @@ filter_str = (
     f'AND timestamp >= "{yesterday}" AND timestamp <= "{now}"'
 )
 
-print("Usando filtro:")
-print(filter_str)
-
-
-for entry in client.list_entries(filter_=filter_str, page_size=3):
-    print(json.dumps(entry.payload_json, indent=2))
-    print("")
+#for entry in client.list_entries(filter_=filter_str, page_size=1):
+    #print(json.dumps(entry.payload_json, indent=2))
+    #print("")
+    
+for entry in client.list_entries(filter_=filter_str, page_size=1):
+    payload = entry.payload
+    if isinstance(payload, dict):
+        type_node = payload.get("resource", {}).get("type", {})
+        
+        
+    print(
+        f"-Tipo: {type_node}"
+    )
